@@ -1,0 +1,76 @@
+﻿
+@model List<contactinfo.web.Models.ContactViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2>Contact List</h2>
+        </div>
+        <div class="col-6">
+
+        </div>
+    </div>
+    <br />
+
+    @if (Model.Any())
+    {
+        <table id="contacts-list" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Phone Number</th>
+                    <th>Address</th>
+                    <th>State</th>
+                    <th>Country</th>
+                    <th>Zip Code</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.FirstName</td>
+                        <td>@item.LastName</td>
+                        <td>@item.PhoneNumber</td>
+                        <td>@item.Address</td>
+                        <td>@item.State</td>
+                        <td>@item.Country</td>
+                        <td>@item.ZipCode</td>
+                        <td>@item.Notes</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No data found.</p>
+    }
+
+</div>
+
+@section Scripts{
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#contacts-list').DataTable({
+                "columnDefs": [{
+                    "targets": [2,3,4,5,6,7],
+                    "orderable": false,
+                }]
+            });
+        });
+    </script>
+
+}
+            
+
